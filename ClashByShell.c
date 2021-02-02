@@ -7,7 +7,7 @@ int Run_Mode;
 char FileName[15],Command[150],SubURL[100];
 
 int UI() {
-	printf("请选择要执行的操作:\n\n1.启动Clash并设置系统代理\n\n2.打开控制面板\n\n3.订阅转换器\n\n4.更新Clash订阅\n\n5.使用说明\n\n6.退出并关闭Clash核心\n\n请输入:");
+	printf("请选择要执行的操作:\n\n1.启动Clash并设置系统代理\n\n2.打开控制面板\n\n3.订阅转换器\n\n4.更新Clash订阅\n\n5.解除UWP应用本地回环限制\n\n6.使用说明\n\n7.退出并关闭Clash核心\n\n请输入:");
 	scanf("%d", &Run_Mode);
 	return 0;
 }
@@ -77,9 +77,12 @@ MENU:UI();
 		Sub_Update();
 	}
 	else if (Run_Mode == 5) {
-		system("explorer https://air.hxhgts.ml");
+		system("FOR /F \"tokens=11 delims=\\\" %p IN ('REG QUERY \"HKCU\\Software\\Classes\\Local Settings\\Software\\Microsoft\\Windows\\CurrentVersion\\AppContainer\\Mappings\"') DO CheckNetIsolation.exe LoopbackExempt -a -p=%p");
 	}
 	else if (Run_Mode == 6) {
+		system("explorer https://air.hxhgts.ml");
+	}
+	else if (Run_Mode == 7) {
 		system("taskkill /f /im clash.exe");
 		system("reg add \"HKEY_CURRENT_USER\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Internet Settings\" /v ProxyEnable /t REG_DWORD /d 00000000 /f");
 		system("reg add \"HKEY_CURRENT_USER\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Internet Settings\" /v ProxyServer /t REG_DWORD /d 00000000 /f");
