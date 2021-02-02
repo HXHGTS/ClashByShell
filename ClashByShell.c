@@ -70,12 +70,7 @@ MENU:UI();
 		}
 	}
 	else if (Run_Mode == 2) {
-		printf("---------------------------------------------------------\n");
-		printf("Host:127.0.0.1\n");
-		printf("端口:9090\n");
-		printf("密钥:无\n");
-		printf("---------------------------------------------------------\n");
-		system("explorer http://clash.razord.top/#/proxies");
+		system("explorer http://clash.hxhgts.ml/#/proxies");
 	}
 	else if (Run_Mode == 3) {
 		Sub_Web();
