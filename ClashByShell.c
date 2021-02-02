@@ -24,11 +24,6 @@ int Check() {
 	if (_access("config", 0)) {
 		system("mkdir config");
 	}
-	if (_access("config\\config.yaml", 0)) {
-		system("curl https://air.hxhgts.ml/config.yaml > config\\config.yaml -#");
-	}
-	system("echo 185.199.112.153 clash.razord.top > %WINDIR%\system32\drivers\etc\hosts");
-	system("cls");
 	return 0;
 }
 
@@ -60,9 +55,12 @@ MENU:UI();
 	if (Run_Mode == 1) {
 		if (fopen("profile\\1.yaml", "r") == NULL) {
 			printf("检测到从未指定过配置文件，请先更新订阅!\n");
-			system("pause > nul");
+			system("pause");
+			system("cls");
+			goto MENU;
 		}
 		else {
+			system("taskkill /f /im clash.exe");
 			system("start /min bin\\clash.exe -d profile -f profile\\1.yaml");
 			system("reg add \"HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Internet Settings\" /v ProxyEnable /t REG_DWORD /d 1 /f");
 			system("reg add \"HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Internet Settings\" /v ProxyServer /d \"127.0.0.1:7890\" /f");
