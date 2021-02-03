@@ -104,7 +104,7 @@ MENU:UI();
 			}
 			system("echo 1 > log\\clash.health");
 			system("reg add \"HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Internet Settings\" /v ProxyEnable /t REG_DWORD /d 1 /f");
-			system("reg add \"HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Internet Settings\" /v ProxyServer /d \"127.0.0.1:7890\" /f");
+			system("reg add \"HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Internet Settings\" /v ProxyServer /d \"http://127.0.0.1:7890,socks://127.0.0.1:7891\" /f");
 			system("reg add \"HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Internet Settings\" /v ProxyOverride /t REG_SZ /d \"\" /f");
 			system("cls");
 			printf("Clash已启动!按任意键回到主页(不会影响代理状态)\n");
