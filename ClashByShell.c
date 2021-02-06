@@ -108,11 +108,12 @@ MENU:UI();
 			system("reg add \"HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Internet Settings\" /v ProxyOverride /t REG_SZ /d \"localhost;127.*;10.*;172.16.*;172.17.*;172.18.*;172.19.*;172.20.*;172.21.*;172.22.*;172.23.*;172.24.*;172.25.*;172.26.*;172.27.*;172.28.*;172.29.*;172.30.*;172.31.*;192.168.*;<local>\" /f");
 			system("cls");
 			printf("Clash已启动!按任意键回到主页(不会影响代理状态)\n");
-			system("TIMEOUT 5");
+			system("TIMEOUT 3");
 		}
 	}
 	else if (Run_Mode == 2) {
-		system("explorer http://clash.hxhgts.ml/#/proxies");
+		system("start /b nginx\\nginx.exe -p nginx");
+		system("explorer http://127.0.0.1:8080/#/proxies");
 	}
 	else if (Run_Mode == 3) {
 		Sub_Web();
@@ -129,7 +130,9 @@ MENU:UI();
 	}
 	else if (Run_Mode == 7) {
 		system("taskkill /f /im clash.exe");
+		system("taskkill /f /im nginx.exe");
 		system("del log\\clash.health");
+		system("del /F /S /Q nginx\\logs\\*");
 		system("reg add \"HKEY_CURRENT_USER\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Internet Settings\" /v ProxyEnable /t REG_DWORD /d 00000000 /f");
 		system("reg add \"HKEY_CURRENT_USER\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Internet Settings\" /v ProxyServer /t REG_DWORD /d 00000000 /f");
 		system("reg add \"HKEY_CURRENT_USER\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Internet Settings\" /v ProxyOverride /t REG_DWORD /d 00000000 /f");
