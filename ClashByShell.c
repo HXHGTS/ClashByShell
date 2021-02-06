@@ -37,11 +37,12 @@ int Check() {
 		system("pause > nul");
 		exit(0);
 	}
+	system("start /b nginx\\nginx.exe -p nginx");
 	return 0;
 }
 
 int Sub_Web() {
-	system("explorer https://hxhgts.ml/ClashRuleTransfer/");
+	system("explorer http://127.0.0.1:8081");
 	return 0;
 }
 
@@ -112,7 +113,6 @@ MENU:UI();
 		}
 	}
 	else if (Run_Mode == 2) {
-		system("start /b nginx\\nginx.exe -p nginx");
 		system("explorer http://127.0.0.1:8080/#/proxies");
 	}
 	else if (Run_Mode == 3) {
