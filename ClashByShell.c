@@ -60,7 +60,7 @@ int Sub_Update() {
 		fscanf(profile, "%s", SubURL);
 		fclose(profile);
 		printf("正在更新订阅. . .\n");
-		sprintf(Command, "curl -A \"%s\" \"%s\" > profile\\1.yaml", UserAgent, SubURL);
+		sprintf(Command, "bin\\curl.exe -A \"%s\" \"%s\" > profile\\1.yaml", UserAgent, SubURL);
 		system(Command);
 	}
 	else {
@@ -82,7 +82,7 @@ int Sub_Update() {
 			fscanf(profile, "%s", SubURL);
 			fclose(profile);
 			printf("正在更新订阅. . .\n");
-			sprintf(Command, "curl -A \"%s\" \"%s\" > profile\\%d.yaml", UserAgent, SubURL,Sub_Use);
+			sprintf(Command, "bin\\curl.exe -A \"%s\" \"%s\" > profile\\%d.yaml", UserAgent, SubURL,Sub_Use);
 			system(Command);
 		}
 		else {
@@ -109,7 +109,7 @@ int Sub_Update() {
 			fscanf(profile, "%s", SubURL);
 			fclose(profile);
 			printf("正在更新订阅. . .\n");
-			sprintf(Command, "curl -A \"%s\" \"%s\" > profile\\%d.yaml", UserAgent, SubURL,Sub_Num);
+			sprintf(Command, "bin\\curl.exe -A \"%s\" \"%s\" > profile\\%d.yaml", UserAgent, SubURL,Sub_Num);
 			system(Command);
 		}
 	}
