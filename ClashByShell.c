@@ -5,7 +5,7 @@
 FILE* profile,*SubList;
 int Run_Mode,Sub_Use,Sub_Num;
 char FileName[20],Command[160],SubURL[100],FileAddr[18];
-char UserAgent[23]="ClashforWindows/0.14.3";
+char UserAgent[23]="ClashforWindows/0.14.4";
 
 int UI() {
 	if (!_access("log\\clash.health", 0)) {
@@ -146,7 +146,6 @@ MENU:UI();
 			system("reg add \"HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Internet Settings\" /v ProxyOverride /t REG_SZ /d \"localhost;127.*;10.*;172.16.*;172.17.*;172.18.*;172.19.*;172.20.*;172.21.*;172.22.*;172.23.*;172.24.*;172.25.*;172.26.*;172.27.*;172.28.*;172.29.*;172.30.*;172.31.*;192.168.*;<local>\" /f");
 			system("cls");
 			printf("Clash已启动!按任意键回到主页(不会影响代理状态)\n");
-			system("TIMEOUT 3");
 		}
 	}
 	else if (Run_Mode == 2) {
@@ -156,7 +155,7 @@ MENU:UI();
 		Sub_Update();
 	}
 	else if (Run_Mode == 4) {
-		system("FOR /F \"tokens=11 delims=\\\" %p IN ('REG QUERY \"HKCU\\Software\\Classes\\Local Settings\\Software\\Microsoft\\Windows\\CurrentVersion\\AppContainer\\Mappings\"') DO CheckNetIsolation.exe LoopbackExempt -a -p=%p");
+		system("bin\\EnableLoopback.exe");
 	}
 	else if (Run_Mode == 5) {
 		printf("首次使用请先更新订阅,调整节点请使用控制台!\n");
