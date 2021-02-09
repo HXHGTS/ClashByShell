@@ -146,9 +146,12 @@ MENU:UI();
 			system("reg add \"HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Internet Settings\" /v ProxyOverride /t REG_SZ /d \"localhost;127.*;10.*;172.16.*;172.17.*;172.18.*;172.19.*;172.20.*;172.21.*;172.22.*;172.23.*;172.24.*;172.25.*;172.26.*;172.27.*;172.28.*;172.29.*;172.30.*;172.31.*;192.168.*;<local>\" /f");
 			system("cls");
 			printf("Clash已启动!按任意键回到主页(不会影响代理状态)\n");
+			printf("正在打开控制台. . .\n");
+			system("explorer http://127.0.0.1:8080/#/proxies");
 		}
 	}
 	else if (Run_Mode == 2) {
+		printf("正在打开控制台. . .\n");
 		system("explorer http://127.0.0.1:8080/#/proxies");
 	}
 	else if (Run_Mode == 3) {
