@@ -11,6 +11,9 @@ int UI() {
 	if (!_access("working\\using.yaml", 0)) {
 		printf("--------------------------------------------\n");
 		printf("检测到Clash核心在后台运行，请不要关闭本窗口!\n");
+		printf("代理地址:    127.0.0.1\n");
+		printf("HTTP端口:    7890\n");
+		printf("socks5端口:  7891\n");
 		printf("--------------------------------------------\n\n");
 	}
 	printf("请选择要执行的操作:\n\n1.启动Clash并设置系统代理\n\n2.打开控制面板\n\n3.更新Clash订阅\n\n4.解除UWP应用本地回环限制\n\n5.使用说明\n\n0.退出并关闭Clash核心\n\n请输入:");
@@ -194,7 +197,7 @@ Main_Menu:UI();
 			sprintf(Command, "start /b bin\\clash.exe -d working -f working\\using.yaml > log\\log.txt");
 			system(Command);
 			system("reg add \"HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Internet Settings\" /v ProxyEnable /t REG_DWORD /d 1 /f");
-			system("reg add \"HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Internet Settings\" /v ProxyServer /d \"http://127.0.0.1:7890;socks://127.0.0.1:7891\" /f");
+			system("reg add \"HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Internet Settings\" /v ProxyServer /d \"127.0.0.1:7890\" /f");
 			system("reg add \"HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Internet Settings\" /v ProxyOverride /t REG_SZ /d \"localhost;127.*;10.*;172.16.*;172.17.*;172.18.*;172.19.*;172.20.*;172.21.*;172.22.*;172.23.*;172.24.*;172.25.*;172.26.*;172.27.*;172.28.*;172.29.*;172.30.*;172.31.*;192.168.*;<local>\" /f");
 			system("cls");
 			printf("Clash已启动!按任意键回到主页(不会影响代理状态)\n");
