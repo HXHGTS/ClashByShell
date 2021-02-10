@@ -15,8 +15,12 @@ int UI() {
 		printf("HTTP端口:    7890\n");
 		printf("socks5端口:  7891\n");
 		printf("--------------------------------------------\n\n");
+		printf("请选择要执行的操作:\n\n1.更换配置文件&重启Clash\n\n2.打开控制面板\n\n3.更新Clash订阅\n\n4.解除UWP应用本地回环限制\n\n5.使用说明\n\n0.退出并关闭Clash核心\n\n请输入:");
 	}
-	printf("请选择要执行的操作:\n\n1.启动Clash并设置系统代理\n\n2.打开控制面板\n\n3.更新Clash订阅\n\n4.解除UWP应用本地回环限制\n\n5.使用说明\n\n0.退出并关闭Clash核心\n\n请输入:");
+	else {
+		printf("请选择要执行的操作:\n\n1.启动Clash并设置系统代理\n\n2.打开控制面板\n\n3.更新Clash订阅\n\n4.解除UWP应用本地回环限制\n\n5.使用说明\n\n0.退出并关闭Clash核心\n\n请输入:");
+	}
+	
 	scanf("%d", &Main_Run_Mode);
 	return 0;
 }
