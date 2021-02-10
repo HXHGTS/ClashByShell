@@ -8,3 +8,8 @@
 
 客户端下载地址: [下载地址](https://github.com/HXHGTS/ClashByShell/releases/latest/download/clash-windows-x64.zip)
 
+### 使用说明
+
+1.首次使用请先输入订阅地址并更新订阅,调整节点请使用控制台!
+
+2.暂时不支持TAP/TUN模式，仅实现了基本的http与socks代理功能
