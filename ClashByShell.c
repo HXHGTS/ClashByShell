@@ -57,10 +57,9 @@ int Check() {
 		if (_access("working\\Country.mmdb", 0)) {
 			printf("正在下载国家级ip数据库. . .\n");
 			system("echo port: 7890> working\\config.yaml");
+			system("echo ipv6: true> working\\config.yaml");
 			system("bin\\clash -d working -t working\\config.yaml");
 		}
-		printf("正在启动nginx. . .\n");
-		system("start /b nginx\\nginx.exe -p nginx");
 		system("cls");
 	}
 	return 0;
@@ -221,13 +220,11 @@ Main_Menu:UI();
 			system("reg add \"HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Internet Settings\" /v ProxyOverride /t REG_SZ /d \"localhost;127.*;10.*;172.16.*;172.17.*;172.18.*;172.19.*;172.20.*;172.21.*;172.22.*;172.23.*;172.24.*;172.25.*;172.26.*;172.27.*;172.28.*;172.29.*;172.30.*;172.31.*;192.168.*;<local>\" /f");
 			system("cls");
 			printf("Clash已启动!按任意键回到主页(不会影响代理状态)\n");
-			printf("正在打开控制台. . .\n");
-			system("explorer http://127.0.0.1:8080/#/proxies");
+			control_interface();
 		}
 	}
 	else if (Main_Run_Mode == 2) {
-		printf("正在打开控制台. . .\n");
-		system("explorer http://127.0.0.1:8080/#/proxies");
+		control_interface();
 	}
 	else if (Main_Run_Mode == 3) {
 		Sub_Update();
@@ -252,4 +249,17 @@ Main_Menu:UI();
 	}
 	system("cls");
 	goto Main_Menu;
+}
+
+int control_interface() {
+	printf("正在启动nginx. . .\n");
+	system("start /b nginx\\nginx.exe -p nginx");
+	printf("正在打开控制台. . .\n");
+	system("explorer http://127.0.0.1:8080/#/proxies");
+	printf("操作完成请按任意键关闭控制台. . .\n");
+	system("pause > nul");
+	printf("正在关闭nginx. . .\n");
+	system("taskkill /f /im nginx.exe");
+	system("cls");
+	return 0;
 }
