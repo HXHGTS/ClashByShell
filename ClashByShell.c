@@ -95,11 +95,15 @@ int Sub_Update() {
 		scanf("%d", &Sub_Use);
 		system("cls");
 		if (Sub_Use != 0) {
-			printf("请选择需要的操作:\n\n1.更新订阅\n\n2.修改订阅地址\n\n3.重命名\n\n4.删除此订阅\n\n5.退出\n\n请输入:");
+			printf("请选择需要的操作:\n\n1.更新订阅\n\n2.修改订阅地址\n\n3.重命名\n\n4.删除此订阅\n\n5.编辑配置文件\n\n6.退出\n\n请输入:");
 			scanf("%d", &Sub_Run_Mode);
 			system("cls");
 			if (Sub_Run_Mode == 1) {
 				printf("正在更新订阅. . .\n");
+				sprintf(FileAddr, "config\\%d.yaml", Sub_Use);
+				profile = fopen(FileAddr, "r");
+				fscanf(profile, "%s", SubURL);
+				fclose(profile);
 				sprintf(Command, "bin\\curl.exe -A \"%s\" \"%s\" > profile\\%d.yaml", UserAgent, SubURL, Sub_Use);
 				system(Command);
 			}
@@ -140,6 +144,13 @@ int Sub_Update() {
 				sprintf(Command, "copy /y config\\sublist.txt_temp config\\sublist.txt");
 				system(Command);
 				sprintf(Command, "del /F /S /Q config\\sublist.txt_temp");
+				system(Command);
+				system("cls");
+				goto Sub_Menu;
+			}
+			else if (Sub_Run_Mode == 5) {
+				printf("正在打开配置文件. . .\n");
+				sprintf(Command, "notepad profile\\%d.yaml", Sub_Use);
 				system(Command);
 				system("cls");
 				goto Sub_Menu;
