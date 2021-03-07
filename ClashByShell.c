@@ -95,10 +95,15 @@ int Sub_Update() {
 		scanf("%d", &Sub_Use);
 		system("cls");
 		if (Sub_Use != 0) {
-			printf("请选择需要的操作:\n\n1.修改订阅地址并更新订阅\n\n2.重命名\n\n3.删除此订阅\n\n4.退出\n\n请输入:");
+			printf("请选择需要的操作:\n\n1.更新订阅\n\n2.修改订阅地址\n\n3.重命名\n\n4.删除此订阅\n\n5.退出\n\n请输入:");
 			scanf("%d", &Sub_Run_Mode);
 			system("cls");
 			if (Sub_Run_Mode == 1) {
+				printf("正在更新订阅. . .\n");
+				sprintf(Command, "bin\\curl.exe -A \"%s\" \"%s\" > profile\\%d.yaml", UserAgent, SubURL, Sub_Use);
+				system(Command);
+			}
+			else if (Sub_Run_Mode == 2) {
 				printf("请在弹出页输入订阅地址. . .\n");
 				sprintf(Command, "notepad config\\%d.yaml", Sub_Use);
 				system(Command);
@@ -111,7 +116,7 @@ int Sub_Update() {
 				sprintf(Command, "bin\\curl.exe -A \"%s\" \"%s\" > profile\\%d.yaml", UserAgent, SubURL, Sub_Use);
 				system(Command);
 			}
-			else if (Sub_Run_Mode == 2) {
+			else if (Sub_Run_Mode == 3) {
 				printf("订阅保存的文件名:");
 				scanf("%s", FileName);
 				sprintf(Command, "type config\\sublist.txt | find /v \"%d.\" > config\\sublist.txt_temp", Sub_Use);
@@ -125,7 +130,7 @@ int Sub_Update() {
 				system("cls");
 				goto Sub_Menu;
 			}
-			else if (Sub_Run_Mode == 3) {
+			else if (Sub_Run_Mode == 4) {
 				sprintf(Command,"del /F /S /Q profile\\%d.yaml",Sub_Use);
 				system(Command);
 				sprintf(Command, "del /F /S /Q config\\%d.yaml", Sub_Use);
@@ -140,7 +145,7 @@ int Sub_Update() {
 				goto Sub_Menu;
 			}
 			else {
-				exit(0);
+				return 0;
 			}
 		}
 		else {
