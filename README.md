@@ -21,3 +21,7 @@ http端口:7890
 socks5端口:7891
 
 ---------------------------------
+
+### 更新Clash核心
+
+[地址](https://github.com/Dreamacro/clash/tree/premium)
