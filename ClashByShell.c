@@ -5,20 +5,25 @@
 FILE* profile,*SubList;
 int Main_Run_Mode,Sub_Run_Mode,Sub_Use,Sub_Num;
 char FileName[20],Command[160],SubURL[100],FileAddr[18];
-char UserAgent[19]="ClashByShell/0.4.0";
+char UserAgent[19]="ClashByShell/0.6.0";
+char version[19]= "ClashByShell/0.6.0";
 
 int UI() {
 	if (!_access("working\\using.yaml", 0)) {
 		printf("--------------------------------------------\n");
 		printf("检测到Clash核心在后台运行，请不要关闭本窗口!\n");
+		printf("--------------------------------------------\n");
+		system("TIMEOUT /NOBREAK /T 3 > nul");
+		system("cls");
+		printf("--------------------------------------------\n");
 		printf("代理地址:    127.0.0.1\n");
 		printf("HTTP端口:    7890\n");
 		printf("socks5端口:  7891\n");
 		printf("--------------------------------------------\n\n");
-		printf("请选择要执行的操作:\n\n1.更换配置文件&重启Clash\n\n2.打开控制面板\n\n3.更新Clash订阅\n\n4.解除UWP应用本地回环限制\n\n5.使用说明\n\n0.退出并关闭Clash核心\n\n请输入:");
+		printf("请选择要执行的操作:\n\n1.更换配置文件&重启Clash\n\n2.打开控制面板\n\n3.更新Clash订阅\n\n4.解除UWP应用本地回环限制(代理微软商店应用)\n\n5.使用说明\n\n6.关于\n\n0.退出\n\n请输入:");
 	}
 	else {
-		printf("请选择要执行的操作:\n\n1.启动Clash并设置系统代理\n\n2.打开控制面板\n\n3.更新Clash订阅\n\n4.解除UWP应用本地回环限制\n\n5.使用说明\n\n0.退出并关闭Clash核心\n\n请输入:");
+		printf("请选择要执行的操作:\n\n1.启动Clash并设置系统代理\n\n2.打开控制面板\n\n3.更新Clash订阅\n\n4.解除UWP应用本地回环限制(代理微软商店应用)\n\n5.使用说明\n\n6.关于\n\n0.退出\n\n请输入:");
 	}
 	
 	scanf("%d", &Main_Run_Mode);
@@ -42,7 +47,6 @@ int Check() {
 	if (_access("working", 0)) {
 		system("mkdir working");
 	}
-	printf("正在检测Clash核心状态. . .\n");
 	if (_access("bin\\clash.exe", 6)) {
 		printf("----------------------------------------------------------------\n");
 		printf("检测不到Clash核心，请将clash核心命名为clash.exe并放到bin文件夹中\n");
@@ -219,8 +223,6 @@ Main_Menu:UI();
 			system("reg add \"HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Internet Settings\" /v ProxyServer /d \"127.0.0.1:7890\" /f");
 			system("reg add \"HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Internet Settings\" /v ProxyOverride /t REG_SZ /d \"localhost;127.*;10.*;172.16.*;172.17.*;172.18.*;172.19.*;172.20.*;172.21.*;172.22.*;172.23.*;172.24.*;172.25.*;172.26.*;172.27.*;172.28.*;172.29.*;172.30.*;172.31.*;192.168.*;<local>\" /f");
 			system("cls");
-			printf("Clash已启动!按任意键回到主页(不会影响代理状态)\n");
-			control_interface();
 		}
 	}
 	else if (Main_Run_Mode == 2) {
@@ -235,6 +237,10 @@ Main_Menu:UI();
 	else if (Main_Run_Mode == 5) {
 		printf("正在打开帮助. . .\n");
 		system("explorer https://hxhgts.ml/ClashByShell/");
+	}
+	else if (Main_Run_Mode == 6) {
+		printf("当前版本:%s\n\n",version);
+		system("pause");
 	}
 	else if (Main_Run_Mode == 0) {
 		printf("正在退出. . .\n");
