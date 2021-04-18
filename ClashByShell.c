@@ -9,7 +9,7 @@ char UserAgent[19]="ClashByShell/0.6.1";
 char version[19]= "ClashByShell/0.6.1";
 
 int UI() {
-	if (!_access("working\\using.yaml", 0) == -1) {
+	if (_access("working\\using.yaml", 0) != -1) {
 		printf("--------------------------------------------\n");
 		printf("检测到Clash核心在后台运行，请不要关闭本窗口!\n");
 		printf("--------------------------------------------\n");
