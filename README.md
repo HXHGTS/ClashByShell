@@ -1,7 +1,7 @@
 # ClashByShell
 
 <h1 align="center">
-  <img src="https://cdn.jsdelivr.net/gh/HXHGTS/ClashByShell/icon.ico">
+  <img src="https://raw.githubusercontent.com/Dreamacro/clash/master/docs/logo.png">
 </h1>
 
 自己基于[Dreamacro](https://github.com/Dreamacro/)的[Clash核心(premium版本)](https://github.com/Dreamacro/clash/releases/tag/premium)搞的轻量化的自用客户端，仅实现了proxy的基本功能
