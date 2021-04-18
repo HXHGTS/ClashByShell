@@ -5,11 +5,11 @@
 FILE* profile,*SubList;
 int Main_Run_Mode,Sub_Run_Mode,Sub_Use,Sub_Num;
 char FileName[20],Command[160],SubURL[100],FileAddr[18];
-char UserAgent[19]="ClashByShell/0.6.0";
-char version[19]= "ClashByShell/0.6.0";
+char UserAgent[19]="ClashByShell/0.6.1";
+char version[19]= "ClashByShell/0.6.1";
 
 int UI() {
-	if (!_access("working\\using.yaml", 0)) {
+	if (!_access("working\\using.yaml", 0) == -1) {
 		printf("--------------------------------------------\n");
 		printf("检测到Clash核心在后台运行，请不要关闭本窗口!\n");
 		printf("--------------------------------------------\n");
@@ -32,25 +32,24 @@ int UI() {
 
 int Check() {
 	system("color 0B");
-	if (_access("profile", 0)) {
+	if (_access("profile", 0)==-1) {
 		system("mkdir profile");
 	}
-	if (_access("config", 0)) {
+	if (_access("config", 0) == -1) {
 		system("mkdir config");
 	}
-	if (_access("log", 0)) {
+	if (_access("log", 0) == -1) {
 		system("mkdir log");
 	}
-	if (_access("bin", 0)) {
+	if (_access("bin", 0) == -1) {
 		system("mkdir bin");
 	}
-	if (_access("working", 0)) {
+	if (_access("working", 0) == -1) {
 		system("mkdir working");
 	}
-	if (_access("bin\\clash.exe", 6)) {
+	if (_access("bin\\clash.exe", 6) == -1) {
 		printf("----------------------------------------------------------------\n");
 		printf("检测不到Clash核心，请将clash核心命名为clash.exe并放到bin文件夹中\n");
-		printf("Clash核心可能被占用，请关闭其它clash软件，按任意键退出！\n");
 		printf("----------------------------------------------------------------\n\n");
 		system("pause > nul");
 		exit(0);
@@ -61,7 +60,7 @@ int Check() {
 		if (_access("working\\Country.mmdb", 0)) {
 			printf("正在下载国家级ip数据库. . .\n");
 			system("echo port: 7890> working\\config.yaml");
-			system("echo ipv6: true> working\\config.yaml");
+			system("echo socks-port: 7891>> working\\config.yaml");
 			system("bin\\clash -d working -t working\\config.yaml");
 		}
 		system("cls");
@@ -200,7 +199,7 @@ int main() {
 Main_Menu:UI();
 	system("cls");
 	if (Main_Run_Mode == 1) {
-		if (_access("profile\\1.yaml", 0)) {
+		if (_access("profile\\1.yaml", 0)==-1) {
 			printf("检测到从未指定过配置文件，请先更新订阅!\n");
 			system("pause");
 			system("cls");
