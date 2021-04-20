@@ -5,25 +5,25 @@
 FILE* profile,*SubList;
 int Main_Run_Mode,Sub_Run_Mode,Sub_Use,Sub_Num;
 char FileName[20],Command[160],SubURL[100],FileAddr[18];
-char UserAgent[19]="ClashByShell/0.6.1";
-char version[19]= "ClashByShell/0.6.1";
+char UserAgent[19]="ClashByShell/0.6.3";
+char version[19]= "ClashByShell/0.6.3";
 
 int UI() {
 	if (_access("working\\using.yaml", 0) != -1) {
 		printf("--------------------------------------------\n");
 		printf("检测到Clash核心在后台运行，请不要关闭本窗口!\n");
 		printf("--------------------------------------------\n");
-		system("TIMEOUT /NOBREAK /T 3 > nul");
+		system("TIMEOUT /T 1 > nul");
 		system("cls");
 		printf("--------------------------------------------\n");
 		printf("代理地址:    127.0.0.1\n");
 		printf("HTTP端口:    7890\n");
 		printf("socks5端口:  7891\n");
 		printf("--------------------------------------------\n\n");
-		printf("请选择要执行的操作:\n\n1.更换配置文件&重启Clash\n\n2.打开控制面板\n\n3.更新Clash订阅\n\n4.解除UWP应用本地回环限制(代理微软商店应用)\n\n5.使用说明\n\n6.关于\n\n0.退出\n\n请输入:");
+		printf("请选择要执行的操作:\n\n1.重启代理\n\n2.控制面板\n\n3.订阅文件\n\n4.代理微软商店应用\n\n5.使用说明\n\n6.关于\n\n0.关闭代理\n\n请输入:");
 	}
 	else {
-		printf("请选择要执行的操作:\n\n1.启动Clash并设置系统代理\n\n2.打开控制面板\n\n3.更新Clash订阅\n\n4.解除UWP应用本地回环限制(代理微软商店应用)\n\n5.使用说明\n\n6.关于\n\n0.退出\n\n请输入:");
+		printf("请选择要执行的操作:\n\n1.启动代理\n\n2.控制面板\n\n3.订阅文件\n\n4.代理微软商店应用\n\n5.使用说明\n\n6.关于\n\n0.关闭代理\n\n请输入:");
 	}
 	
 	scanf("%d", &Main_Run_Mode);
@@ -32,7 +32,7 @@ int UI() {
 
 int Check() {
 	system("color 0B");
-	if (_access("profile", 0)==-1) {
+	if (_access("profile", 0) == -1) {
 		system("mkdir profile");
 	}
 	if (_access("config", 0) == -1) {
@@ -48,19 +48,17 @@ int Check() {
 		system("mkdir working");
 	}
 	if (_access("bin\\clash.exe", 6) == -1) {
-		printf("----------------------------------------------------------------\n");
-		printf("检测不到Clash核心，请将clash核心命名为clash.exe并放到bin文件夹中\n");
-		printf("----------------------------------------------------------------\n\n");
+		printf("------------------\n");
+		printf("检测不到Clash核心!\n");
+		printf("------------------\n\n");
 		system("pause > nul");
 		exit(0);
 	}
 	else {
-		printf("已经检测到Clash核心!\n");
 		printf("正在检测国家级ip数据库. . .\n");
-		if (_access("working\\Country.mmdb", 0)) {
+		if (_access("working\\Country.mmdb", 0)==-1) {
 			printf("正在下载国家级ip数据库. . .\n");
 			system("echo port: 7890> working\\config.yaml");
-			system("echo socks-port: 7891>> working\\config.yaml");
 			system("bin\\clash -d working -t working\\config.yaml");
 		}
 		system("cls");
