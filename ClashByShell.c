@@ -5,6 +5,7 @@
 FILE* profile,*SubList;
 int Main_Run_Mode,Sub_Run_Mode,Sub_Use,Sub_Num;
 int fallback;
+int i;
 char FileName[20],Command[160],SubURL[100],FileAddr[18];
 char UserAgent[19]="ClashByShell/0.6.4";
 char UI_Version[19]= "ClashByShell/0.6.4";
@@ -55,13 +56,33 @@ int Check() {
 			system("bin\\clash -d working -t working\\config.yaml");
 		}
 		system("bin\\clash -v > working\\core_version.conf");
-		system("cls");
+	}
+	Auto_Sub_Update();
+	system("cls");
+	return 0;
+}
+
+int Auto_Sub_Update() {
+	for (i = 1; i <= 200; i++) {
+		sprintf(FileAddr, "config\\%d.yaml", i);
+		if (fopen(FileAddr, "r") == NULL) {
+			Sub_Num = i;
+			break;
+		}
+	}
+	printf("正在更新订阅. . .\n");
+	for (i = 1; i < Sub_Num; i++) {
+		sprintf(FileAddr, "config\\%d.yaml", i);
+		profile = fopen(FileAddr, "r");
+		fallback = fscanf(profile, "%s", SubURL);
+		fclose(profile);
+		sprintf(Command, "bin\\curl.exe -A \"%s\" \"%s\" > profile\\%d.yaml", UserAgent, SubURL, i);
+		system(Command);
 	}
 	return 0;
 }
 
 int Sub_Update() {
-	int i;
 	if (fopen("config\\sublist.txt", "r") == NULL) {
 	printf("订阅保存的文件名:");
 		fallback=scanf("%s", FileName);
