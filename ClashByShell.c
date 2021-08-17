@@ -17,11 +17,8 @@ int UI() {
 		printf("HTTP端口: 7890\n");
 		printf("socks5端口: 7891\n");
 		printf("--------------------------------------------\n\n");
-		printf("请选择要执行的操作:\n\n1.重启代理\n\n2.控制面板\n\n3.订阅文件\n\n4.代理微软商店应用\n\n5.使用说明\n\n6.关于\n\n0.关闭代理\n\n请输入:");
 	}
-	else {
-		printf("请选择要执行的操作:\n\n1.启动代理\n\n2.控制面板\n\n3.订阅文件\n\n4.代理微软商店应用\n\n5.使用说明\n\n6.关于\n\n0.关闭代理\n\n请输入:");
-	}
+	printf("请选择要执行的操作:\n\n1.启动/重启代理\n\n2.控制面板\n\n3.订阅文件\n\n4.代理微软商店应用\n\n5.打开Log文件夹(用于排错)\n\n6.使用说明\n\n7.关于\n\n0.关闭代理\n\n请输入:");
 	fallback=scanf("%d", &Main_Run_Mode);
 	return 0;
 }
@@ -266,10 +263,13 @@ Main_Menu:UI();
 		system("bin\\EnableLoopback.exe");
 	}
 	else if (Main_Run_Mode == 5) {
+		system("explorer log");
+	}
+	else if (Main_Run_Mode == 6) {
 		printf("正在打开帮助. . .\n");
 		system("explorer https://hxhgts.github.io/ClashByShell/");
 	}
-	else if (Main_Run_Mode == 6) {
+	else if (Main_Run_Mode == 7) {
 		if (fopen("working\\core_version.conf", "r") != NULL) {
 			profile = fopen("working\\core_version.conf", "r");
 			fread(Core_Version, sizeof(char), 71, profile);
