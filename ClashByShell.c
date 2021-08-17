@@ -10,6 +10,7 @@ char FileName[20],Command[160],SubURL[100],FileAddr[18];
 char UserAgent[19]="ClashByShell/0.6.4";
 char UI_Version[19]= "ClashByShell/0.6.4";
 char Core_Version[75];
+int UI(), Check(), Auto_Sub_Update(), Sub_Update(), main(), Control_Interface();
 
 int UI() {
 	if (_access("working\\using.yaml", 0) != -1) {
@@ -266,8 +267,7 @@ Main_Menu:UI();
 			system("taskkill /f /im clash.exe");
 			sprintf(Command, "copy /y profile\\%d.yaml working\\using.yaml", Sub_Use);
 			system(Command);
-			system("echo ------------------------------------------- >> log\\log.txt");
-			sprintf(Command, "start /b bin\\clash.exe -d working -f working\\using.yaml >> log\\log.txt");
+			sprintf(Command, "start /b bin\\clash.exe -d working -f working\\using.yaml > log\\log.txt");
 			system(Command);
 			system("reg add \"HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Internet Settings\" /v ProxyEnable /t REG_DWORD /d 1 /f");
 			system("reg add \"HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Internet Settings\" /v ProxyServer /d \"127.0.0.1:7890\" /f");
@@ -276,7 +276,7 @@ Main_Menu:UI();
 		}
 	}
 	else if (Main_Run_Mode == 2) {
-		control_interface();
+		Control_Interface();
 	}
 	else if (Main_Run_Mode == 3) {
 		Sub_Update();
@@ -318,7 +318,7 @@ Main_Menu:UI();
 	goto Main_Menu;
 }
 
-int control_interface() {
+int Control_Interface() {
 	printf("正在启动nginx. . .\n");
 	system("start /b nginx\\nginx.exe -p nginx");
 	printf("正在打开控制台. . .\n");
