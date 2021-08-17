@@ -4,7 +4,7 @@
   <img src="https://raw.githubusercontent.com/Dreamacro/clash/master/docs/logo.png" width="10%" height="10%">
 </h1>
 
-自己基于[Dreamacro](https://github.com/Dreamacro/)的[Clash核心(premium版本)](https://github.com/Dreamacro/clash/releases/tag/premium)搞的轻量化的自用客户端，仅实现了proxy的基本功能
+自己基于[ClashDotNetFramework](https://github.com/ClashDotNetFramework)的[Clash核心(VLESS+XTLS版本)](https://github.com/ClashDotNetFramework/experimental-clash/releases/latest)搞的轻量化的自用客户端，仅实现了proxy的基本功能
 
 客户端下载地址: [下载地址](https://github.com/HXHGTS/ClashByShell/releases/latest/download/clash-windows-x64.zip)
 
@@ -24,4 +24,4 @@ socks5端口:7891
 
 ### 更新Clash核心
 
-[地址](https://github.com/Dreamacro/clash/releases/tag/premium)
+[地址](https://github.com/ClashDotNetFramework/experimental-clash/releases/latest)
