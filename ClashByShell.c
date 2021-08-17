@@ -13,11 +13,6 @@ char Core_Version[75];
 int UI() {
 	if (_access("working\\using.yaml", 0) != -1) {
 		printf("--------------------------------------------\n");
-		printf("检测到Clash核心在后台运行,请不要关闭本窗口!\n");
-		printf("--------------------------------------------\n");
-		system("TIMEOUT /T 1 > nul");
-		system("cls");
-		printf("--------------------------------------------\n");
 		printf("代理地址: 127.0.0.1\n");
 		printf("HTTP端口: 7890\n");
 		printf("socks5端口: 7891\n");
