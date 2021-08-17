@@ -4,9 +4,11 @@
 
 FILE* profile,*SubList;
 int Main_Run_Mode,Sub_Run_Mode,Sub_Use,Sub_Num;
+int fallback;
 char FileName[20],Command[160],SubURL[100],FileAddr[18];
-char UserAgent[19]="ClashByShell/0.6.3";
-char version[19]= "ClashByShell/0.6.3";
+char UserAgent[19]="ClashByShell/0.6.4";
+char UI_Version[19]= "ClashByShell/0.6.4";
+char Core_Version[75];
 
 int UI() {
 	if (_access("working\\using.yaml", 0) != -1) {
@@ -16,17 +18,16 @@ int UI() {
 		system("TIMEOUT /T 1 > nul");
 		system("cls");
 		printf("--------------------------------------------\n");
-		printf("代理地址:    127.0.0.1\n");
-		printf("HTTP端口:    7890\n");
-		printf("socks5端口:  7891\n");
+		printf("代理地址: 127.0.0.1\n");
+		printf("HTTP端口: 7890\n");
+		printf("socks5端口: 7891\n");
 		printf("--------------------------------------------\n\n");
 		printf("请选择要执行的操作:\n\n1.重启代理\n\n2.控制面板\n\n3.订阅文件\n\n4.代理微软商店应用\n\n5.使用说明\n\n6.关于\n\n0.关闭代理\n\n请输入:");
 	}
 	else {
 		printf("请选择要执行的操作:\n\n1.启动代理\n\n2.控制面板\n\n3.订阅文件\n\n4.代理微软商店应用\n\n5.使用说明\n\n6.关于\n\n0.关闭代理\n\n请输入:");
 	}
-	
-	scanf("%d", &Main_Run_Mode);
+	fallback=scanf("%d", &Main_Run_Mode);
 	return 0;
 }
 
@@ -61,6 +62,7 @@ int Check() {
 			system("echo port: 7890> working\\config.yaml");
 			system("bin\\clash -d working -t working\\config.yaml");
 		}
+		system("bin\\clash -v > working\\core_version.conf");
 		system("cls");
 	}
 	return 0;
@@ -70,7 +72,7 @@ int Sub_Update() {
 	int i;
 	if (fopen("config\\sublist.txt", "r") == NULL) {
 	printf("订阅保存的文件名:");
-		scanf("%s", FileName);
+		fallback=scanf("%s", FileName);
 		printf("请在弹出页输入订阅地址. . .\n");
 		system("echo 请删掉这段文字并将订阅链接粘贴至此 > config\\1.yaml");
 		system("notepad config\\1.yaml");
@@ -79,7 +81,7 @@ int Sub_Update() {
 		fclose(SubList);
 		system("cls");
 		profile = fopen("config\\1.yaml", "r");
-		fscanf(profile, "%s", SubURL);
+		fallback=fscanf(profile, "%s", SubURL);
 		fclose(profile);
 		printf("正在更新订阅. . .\n");
 		sprintf(Command, "bin\\curl.exe -A \"%s\" \"%s\" > profile\\1.yaml", UserAgent, SubURL);
@@ -92,17 +94,17 @@ int Sub_Update() {
 		printf("----------------------------------\n");
 		printf("需要添加并更新新订阅请输入0\n");
 		printf("请选择需要操作的订阅，输入序号即可:");
-		scanf("%d", &Sub_Use);
+		fallback=scanf("%d", &Sub_Use);
 		system("cls");
 		if (Sub_Use != 0) {
 			printf("请选择需要的操作:\n\n1.更新订阅\n\n2.修改订阅地址\n\n3.重命名\n\n4.删除此订阅\n\n5.编辑配置文件\n\n6.退出\n\n请输入:");
-			scanf("%d", &Sub_Run_Mode);
+			fallback=scanf("%d", &Sub_Run_Mode);
 			system("cls");
 			if (Sub_Run_Mode == 1) {
 				printf("正在更新订阅. . .\n");
 				sprintf(FileAddr, "config\\%d.yaml", Sub_Use);
 				profile = fopen(FileAddr, "r");
-				fscanf(profile, "%s", SubURL);
+				fallback=fscanf(profile, "%s", SubURL);
 				fclose(profile);
 				sprintf(Command, "bin\\curl.exe -A \"%s\" \"%s\" > profile\\%d.yaml", UserAgent, SubURL, Sub_Use);
 				system(Command);
@@ -114,7 +116,7 @@ int Sub_Update() {
 				system("cls");
 				sprintf(FileAddr, "config\\%d.yaml", Sub_Use);
 				profile = fopen(FileAddr, "r");
-				fscanf(profile, "%s", SubURL);
+				fallback=fscanf(profile, "%s", SubURL);
 				fclose(profile);
 				printf("正在更新订阅. . .\n");
 				sprintf(Command, "bin\\curl.exe -A \"%s\" \"%s\" > profile\\%d.yaml", UserAgent, SubURL, Sub_Use);
@@ -122,7 +124,7 @@ int Sub_Update() {
 			}
 			else if (Sub_Run_Mode == 3) {
 				printf("订阅保存的文件名:");
-				scanf("%s", FileName);
+				fallback=scanf("%s", FileName);
 				sprintf(Command, "type config\\sublist.txt | find /v \"%d.\" > config\\sublist.txt_temp", Sub_Use);
 				system(Command);
 				sprintf(Command, "echo %d.%s >> config\\sublist.txt_temp",Sub_Use,FileName);
@@ -168,7 +170,7 @@ int Sub_Update() {
 				}
 			}
 			printf("订阅保存的文件名:");
-			scanf("%s", FileName);
+			fallback=scanf("%s", FileName);
 			printf("请在弹出页输入订阅地址. . .\n");
 			sprintf(Command, "echo 请删掉这段文字并将订阅链接粘贴至此 > config\\%d.yaml", Sub_Num);
 			system(Command);
@@ -180,7 +182,7 @@ int Sub_Update() {
 			system("cls");
 			sprintf(FileAddr, "config\\%d.yaml", Sub_Num);
 			profile = fopen(FileAddr, "r");
-			fscanf(profile, "%s", SubURL);
+			fallback=fscanf(profile, "%s", SubURL);
 			fclose(profile);
 			printf("正在更新订阅. . .\n");
 			sprintf(Command, "bin\\curl.exe -A \"%s\" \"%s\" > profile\\%d.yaml", UserAgent, SubURL,Sub_Num);
@@ -209,7 +211,7 @@ Main_Menu:UI();
 			system("type config\\sublist.txt");
 			printf("----------------------------------\n");
 			printf("请选择使用的订阅，输入序号即可:");
-			scanf("%d", &Sub_Use);
+			fallback=scanf("%d", &Sub_Use);
 			system("cls");
 			system("taskkill /f /im clash.exe");
 			sprintf(Command, "copy /y profile\\%d.yaml working\\using.yaml", Sub_Use);
@@ -233,11 +235,19 @@ Main_Menu:UI();
 	}
 	else if (Main_Run_Mode == 5) {
 		printf("正在打开帮助. . .\n");
-		system("explorer https://hxhgts.ml/ClashByShell/");
+		system("explorer https://hxhgts.github.io/ClashByShell/");
 	}
 	else if (Main_Run_Mode == 6) {
-		printf("当前版本:%s\n\n",version);
-		system("pause");
+		if (fopen("working\\core_version.conf", "r") != NULL) {
+			profile = fopen("working\\core_version.conf", "r");
+			fread(Core_Version, sizeof(char), 71, profile);
+			fclose(profile);
+		}
+		printf("----------------------------------------------------------------------------------------\n");
+		printf("UI版本: %s\n", UI_Version);
+		printf("Clash版本: %s", Core_Version);
+		printf("----------------------------------------------------------------------------------------\n");
+		system("pause > nul");
 	}
 	else if (Main_Run_Mode == 0) {
 		printf("正在退出. . .\n");
