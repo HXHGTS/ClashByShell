@@ -4,7 +4,7 @@
   <img src="https://raw.githubusercontent.com/Dreamacro/clash/master/docs/logo.png" width="10%" height="10%">
 </h1>
 
-自己基于[ClashDotNetFramework](https://github.com/ClashDotNetFramework)的[Clash核心(VLESS+XTLS版本)](https://github.com/ClashDotNetFramework/experimental-clash/releases/latest)搞的轻量化的自用客户端，仅实现了proxy的基本功能
+基于[ClashDotNetFramework](https://github.com/ClashDotNetFramework)的开源[Clash核心(支持VLESS+XTLS)](https://github.com/ClashDotNetFramework/experimental-clash/releases/latest)搞的轻量化的自用客户端，仅实现了proxy的基本功能
 
 客户端下载地址: [下载地址](https://github.com/HXHGTS/ClashByShell/releases/latest/download/clash-windows-x64.zip)
 
