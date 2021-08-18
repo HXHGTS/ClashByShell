@@ -10,7 +10,7 @@ char FileName[20],Command[160],SubURL[100],FileAddr[18];
 char UserAgent[19]="ClashByShell/0.6.4";
 char UI_Version[19]= "ClashByShell/0.6.4";
 char Core_Version[75];
-int UI(), Check(), Auto_Sub_Update(), Sub_Update(), main(), Control_Interface();
+int UI(), Check(), Auto_Sub_Update(), Sub_Update(), main(), Control_Interface(),DNS_Changer(int mode);
 
 int UI() {
 	if (_access("working\\using.yaml", 0) != -1) {
@@ -58,8 +58,29 @@ int Check() {
 		}
 		system("bin\\clash -v > working\\core_version.conf");
 	}
+	DNS_Changer(1);
 	Auto_Sub_Update();
 	system("cls");
+	return 0;
+}
+
+int DNS_Changer(int mode) {
+	if (mode == 1) {
+		system("netsh interface ip set dnsservers \"以太网\" static 223.5.5.5");
+		system("netsh interface ip add dnsservers \"以太网\" 223.6.6.6");
+		system("netsh interface ipv6 set dnsservers \"以太网\" static 2400:3200::1");
+		system("netsh interface ipv6 add dnsservers \"以太网\" 2400:3200:baba::1");
+		system("netsh interface ip set dnsservers \"WLAN\" static 223.5.5.5");
+		system("netsh interface ip add dnsservers \"WLAN\" 223.6.6.6");
+		system("netsh interface ipv6 set dnsservers \"WLAN\" static 2400:3200::1");
+		system("netsh interface ipv6 add dnsservers \"WLAN\" 2400:3200:baba::1");
+	}
+	else {
+		system("netsh interface ip set dnsservers \"以太网\" source=dhcp");
+		system("netsh interface ipv6 set dnsservers \"以太网\" source=dhcp");
+		system("netsh interface ip set dnsservers \"WLAN\" source=dhcp");
+		system("netsh interface ipv6 set dnsservers \"WLAN\" source=dhcp");
+	}
 	return 0;
 }
 
@@ -312,6 +333,7 @@ Main_Menu:UI();
 		system("reg add \"HKEY_CURRENT_USER\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Internet Settings\" /v ProxyEnable /t REG_DWORD /d 00000000 /f");
 		system("reg add \"HKEY_CURRENT_USER\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Internet Settings\" /v ProxyServer /t REG_DWORD /d 00000000 /f");
 		system("reg add \"HKEY_CURRENT_USER\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Internet Settings\" /v ProxyOverride /t REG_DWORD /d 00000000 /f");
+		DNS_Changer(2);
 		exit(0);
 	}
 	system("cls");
