@@ -24,6 +24,3 @@ socks5端口:7891
 
 ---------------------------------
 
-### 更新Clash核心
-
-[地址](https://github.com/ClashDotNetFramework/experimental-clash/releases/latest)
