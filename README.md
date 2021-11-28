@@ -6,6 +6,8 @@
 
 基于[ClashDotNetFramework](https://github.com/ClashDotNetFramework)的开源[Clash核心(支持VLESS+XTLS)](https://github.com/ClashDotNetFramework/experimental-clash/releases/latest)搞的轻量化的自用客户端，仅实现了proxy的基本功能
 
+警告⚠: 由于Clash.NET原作者删库，核心部分不再更新，将采用其删库前的最后版本!
+
 客户端下载地址: [下载地址](https://github.com/HXHGTS/ClashByShell/releases/latest/download/clash-windows-x64.zip)
 
 ### 使用说明
