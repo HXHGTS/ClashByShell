@@ -4,7 +4,7 @@
   <img src="https://raw.githubusercontent.com/Clash-Mini/Clash.Mini/master/icon/Clash.Mini.ico" width="10%" height="10%"> <img src="https://github.com/Clash-Mini/Clash.Meta/raw/rm/Meta.png" width="8%" height="8%">
 </h1>
 
-基于[Clash-Mini](https://github.com/Clash-Mini)的开源[Clash核心(支持VLESS+XTLS)](https://github.com/Clash-Mini/Clash.Meta/releases/latest)搞的轻量化的自用客户端，仅实现了proxy的基本功能
+基于[Clash-Mini](https://github.com/Clash-Mini)的开源[Clash.Meta核心(支持VLESS+XTLS)](https://github.com/Clash-Mini/Clash.Meta/releases/latest)搞的轻量化的自用客户端，仅实现了proxy的基本功能
 
 客户端下载地址: [下载地址](https://github.com/HXHGTS/ClashByShell/releases/latest/download/clash-windows-x64.zip)
 
